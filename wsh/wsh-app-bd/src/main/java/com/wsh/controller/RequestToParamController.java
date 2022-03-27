@@ -30,20 +30,20 @@ public class RequestToParamController {
                                 String pesel,
                                 String email,
                                 String phone) {
-        String result = "Name: " + name +
-                        ", " +
+        String result = " Name: " + name +
+                        ",\n " +
                         "Surname: " + surname +
-                        ", " +
+                        ",\n " +
                         "Pesel: " + pesel;
         if (nonNull(email)) {
-            result += ", Email: " + email;
+            result += ",\n Email: " + email;
         } else {
-            result += ", Email: nie znamy Twojego adresu e-mail";
+            result += ",\n Email: nie znamy Twojego adresu e-mail";
         }
         if (nonNull(phone)) {
-            result += ", Phone: " + phone;
+            result += ",\n Phone: " + phone;
         } else {
-            result += ", Phone: nie znamy Twojego telefonu";
+            result += ",\n Phone: nie znamy Twojego telefonu";
         }
         return result;
     }
