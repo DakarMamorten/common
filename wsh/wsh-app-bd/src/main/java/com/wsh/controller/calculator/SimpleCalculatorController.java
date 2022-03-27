@@ -1,16 +1,18 @@
-package com.wsh.controller;
+package com.wsh.controller.calculator;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author "Vladyslav Paun"
  */
 @RestController
-public class CalculatorController {
+@RequestMapping("/calculator")
+public class SimpleCalculatorController {
 
-    @GetMapping(value = "/{operation}/{num1}/{num2}")
+    @GetMapping(value = "/simple/{operation}/{num1}/{num2}")
     public double calculate(@PathVariable String operation,
                             @PathVariable double num1,
                             @PathVariable double num2) {

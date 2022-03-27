@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+</head>
+<body>
+<div>
+  <form th:action="@{/calculator/web}" method="post">
+    <input id="value1" type="text" name="value1">
+    <select name="operation">
+      <option th:each="operation : ${T(com.wsh.domain.Operation).values()}"
+              th:value="${operation}" th:text="${operation}"></option>
+    </select>
+    <input id="value2" type="text" name="value2">
+    <input type="submit" value="=">
+  </form>
+</div>
+<div>
+  <p th:if="${result} != null" th:text="'Result: ' + ${result}"></p>
+</div>
+</body>
+</html>

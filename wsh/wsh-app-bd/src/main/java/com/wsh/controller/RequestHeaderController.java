@@ -14,7 +14,7 @@ public class RequestHeaderController {
     @GetMapping("/RequestHeader")
     @ResponseBody
     public String exampleRequestHeader(@RequestHeader("User-Agent") String client,
-                                       @RequestHeader("Accept_language") String language,
+                                       @RequestHeader("Accept-Language") String language,
                                        @RequestHeader("Cookie") String cookie,
                                        @RequestHeader("Host") String host) {
         return "client: " + client + " , " + "language: " + language + " , " + "cookie: " + cookie + " , " + "host: " + host;
