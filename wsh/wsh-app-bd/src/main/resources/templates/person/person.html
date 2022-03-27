@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <meta charset="UTF-8"/>
+  <title>Person</title>
+</head>
+<body>
+<form th:action="@{/person}" method="post">
+  <p><input type="text" th:field="${person.getId}" /></p>
+  <p><input type="text" th:field="${person.getName}" /></p>
+  <p><input type="text" th:field="${person.getSurname}" /></p>
+  <p><input type="text" th:field="${person.getEmail}" /></p>
+  <p><input type="text" th:field="${person.getPhoneNumber}" /></p>
+  <p><input type="submit" value="Add" /></p>
+</form>
+</body>
+</html>
