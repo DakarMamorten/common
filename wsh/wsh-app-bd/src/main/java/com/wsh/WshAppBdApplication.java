@@ -1,4 +1,4 @@
-package com.wsh.wshappbd;
+package com.wsh;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
