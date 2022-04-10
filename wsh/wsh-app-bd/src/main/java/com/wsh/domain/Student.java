@@ -18,7 +18,7 @@ public class Student {
     @Size(min = 2,max=15)
     private String surname;
     @NotEmpty(message = "Student age cannot be empty. ")
-    @Size(min = 18 ,message = "You can't vote ")
+    @Size(min = 18, max = 35,message = "You can't vote ")
     private String age;
 
     public void add(Student student) {
