@@ -32,6 +32,7 @@ public class PersonAddController {
   @PostMapping("/add")
   public String addPerson(@Valid @ModelAttribute Person person, BindingResult result, Model model) {
     if (result.hasErrors()) {
+      System.out.println(result.getAllErrors());
       return "person/person";
     }
     model.addAttribute("person", person);

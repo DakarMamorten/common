@@ -12,11 +12,15 @@ import lombok.NoArgsConstructor;
 public class Person {
 
   private String id = UUID.randomUUID().toString();
-  @NotEmpty(message = "User's name cannot be empty.")
+  @NotEmpty(message = "Person's name cannot be empty.")
   private String name;
+  @NotEmpty(message = "Person's surname cannot be empty.")
   private String surname;
+  @NotEmpty(message = "Person's PESEL cannot be empty.")
   private String pesel;
+  @NotEmpty(message = "Person's email cannot be empty.")
   private String email;
+  @NotEmpty(message = "Person's phone cannot be empty.")
   private String phoneNumber;
 
 }

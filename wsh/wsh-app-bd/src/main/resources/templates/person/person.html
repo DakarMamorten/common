@@ -14,26 +14,31 @@
         <div class="form-group">
           <label for="personName">Name</label>
           <input type="text" class="form-control" id="personName" placeholder="Enter name" th:field="*{person.name}">
+          <span style="color: red" th:if="${#fields.hasErrors('person.name')}" th:errors="*{person.name}"></span>
         </div>
         <div class="form-group">
           <label for="personSurname">Surname</label>
           <input type="text" class="form-control" id="personSurname" placeholder="Enter surname"
                  th:field="*{person.surname}">
+          <span style="color: red" th:if="${#fields.hasErrors('person.surname')}" th:errors="*{person.surname}"></span>
         </div>
         <div class="form-group">
           <label for="personPesel">Pesel</label>
           <input type="text" class="form-control" id="personPesel" placeholder="Enter PESEL"
                  th:field="*{person.pesel}">
+          <span style="color: red" th:if="${#fields.hasErrors('person.pesel')}" th:errors="*{person.pesel}"></span>
         </div>
         <div class="form-group">
           <label for="personEmail">Email address</label>
           <input type="email" class="form-control" id="personEmail" placeholder="Enter email"
                  th:field="*{person.email}">
+          <span style="color: red" th:if="${#fields.hasErrors('person.email')}" th:errors="*{person.email}"></span>
         </div>
         <div class="form-group">
           <label for="personPhone">Phone number</label>
           <input type="text" class="form-control" id="personPhone" placeholder="Enter phone number"
                  th:field="*{person.phoneNumber}">
+          <span style="color: red" th:if="${#fields.hasErrors('person.phoneNumber')}" th:errors="*{person.phoneNumber}"></span>
         </div>
         <button type="submit" class="btn btn-primary">Add person</button>
       </form>
@@ -41,10 +46,6 @@
     </div>
   </div>
 </div>
-<style>
-  .error {
-    color: red;
-  }
-</style>
+
 </body>
 </html>
