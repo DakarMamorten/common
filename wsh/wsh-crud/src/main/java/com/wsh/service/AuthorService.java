@@ -27,11 +27,11 @@ public class AuthorService {
 
 
   public Page<Author> getAuthors(PagingRequest pagingRequest) {
-    List<Author> employees = authorRepository.findAll();
-    if (employees.isEmpty()) {
+    List<Author> authors = authorRepository.findAll();
+    if (authors.isEmpty()) {
       return new Page<>();
     }
-    return getPage(employees, pagingRequest);
+    return getPage(authors, pagingRequest);
 
 
   }
@@ -59,13 +59,13 @@ public class AuthorService {
   private Predicate<Author> filterAuthors(PagingRequest pagingRequest) {
     if (pagingRequest.getSearch() == null || StringUtils.isEmpty(pagingRequest.getSearch()
         .getValue())) {
-      return employee -> true;
+      return author -> true;
     }
 
     String value = pagingRequest.getSearch()
         .getValue();
 
-    return employee -> employee.getName()
+    return author -> author.getName()
         .toLowerCase()
         .contains(value);
   }
