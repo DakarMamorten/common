@@ -13,6 +13,7 @@
     <modules>
         <module>wsh-core</module>
         <module>wsh-app-bd</module>
+        <module>wsh-crud</module>
     </modules>
 
     <artifactId>wsh</artifactId>
