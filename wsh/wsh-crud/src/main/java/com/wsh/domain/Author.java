@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Author {
 
   @Id
@@ -17,4 +19,7 @@ public class Author {
   @Column(nullable = false)
   private String name;
 
+  public Author(String name) {
+    this.name = name;
+  }
 }

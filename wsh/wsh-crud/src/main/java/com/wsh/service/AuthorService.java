@@ -97,4 +97,8 @@ public class AuthorService {
     return EMPTY_COMPARATOR;
   }
 
+  public void add(String name) {
+    Author author = new Author(name);
+    authorRepository.save(author);
+  }
 }
