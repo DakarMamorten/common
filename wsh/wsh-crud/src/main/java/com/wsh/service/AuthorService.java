@@ -11,10 +11,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -100,5 +102,14 @@ public class AuthorService {
   public void add(String name) {
     Author author = new Author(name);
     authorRepository.save(author);
+  }
+
+  public Author findById(Long id) {
+    return authorRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+  }
+
+  @Transactional
+  public void update(Long authorId, String authorName) {
+    authorRepository.findById(authorId).ifPresent(a -> a.setName(authorName));
   }
 }
