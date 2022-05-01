@@ -1,11 +1,9 @@
 package com.wsh.controller.category;
 
-import com.wsh.domain.Category;
 import com.wsh.service.CategoryService;
+import javax.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,16 +15,16 @@ public class CategoriesEditController {
 
   private final CategoryService categoryService;
 
-  @GetMapping
-  public String getForUpdateAuthor(final @RequestParam Long id, final Model model) {
-    final Category category = categoryService.findById(id);
-    model.addAttribute("category", category);
-    return "/category/update";
-  }
+//  @GetMapping
+//  public String getForUpdate(final @RequestParam Long id, final Model model) {
+//    final Category category = categoryService.findById(id);
+//    model.addAttribute("category", category);
+//    return "/category/update";
+//  }
 
-  @PostMapping
-  public String updateAuthor(final @RequestParam Long authorId, final @RequestParam String authorName) {
-    categoryService.update(authorId, authorName);
+  @PostMapping("/{categoryId}")
+  public String update(final @PathParam("categoryId") Long categoryId, final @RequestParam String categoryName) {
+    categoryService.update(categoryId, categoryName);
     return "redirect:/category/list";
   }
 }

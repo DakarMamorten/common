@@ -15,13 +15,14 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryId;
-    private String name;
-    private LocalDateTime lastUpdate;
 
-    public Category(String name) {
-        this.name = name;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long categoryId;
+  private String name;
+  private LocalDateTime lastUpdate = LocalDateTime.now();
+
+  public Category(String name) {
+    this.name = name;
+  }
 }

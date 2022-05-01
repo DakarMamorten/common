@@ -14,7 +14,7 @@ public class CategoryAddController {
   private final CategoryService categoryService;
 
   @PostMapping("/add")
-  public String addAuthor(final String categoryName) {
+  public String add(final String categoryName) {
     categoryService.add(categoryName);
     return "redirect:/category/list";
   }
