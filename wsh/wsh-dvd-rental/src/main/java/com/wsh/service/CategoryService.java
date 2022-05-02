@@ -5,6 +5,8 @@ import com.wsh.repository.CategoryRepository;
 import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,4 +31,11 @@ public class CategoryService {
     categoryRepository.findById(categoryId).ifPresent(a -> a.setName(categoryName));
   }
 
+  public Page<Category> findAll(final Pageable pageable) {
+    return categoryRepository.findAll(pageable);
+  }
+
+  public void delete(final Long categoryId) {
+    categoryRepository.deleteById(categoryId);
+  }
 }

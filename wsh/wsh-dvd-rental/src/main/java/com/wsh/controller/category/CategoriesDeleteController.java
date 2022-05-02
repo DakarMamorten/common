@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/category/update")
+@RequestMapping("/category/delete")
 @RequiredArgsConstructor
-public class CategoriesEditController {
+public class CategoriesDeleteController {
 
   private final CategoryService categoryService;
 
   @PostMapping
-  public String update(final @RequestParam("categoryId") Long categoryId, final @RequestParam String categoryName) {
-    categoryService.update(categoryId, categoryName);
+  public String update(final @RequestParam("categoryId") Long categoryId) {
+    categoryService.delete(categoryId);
     return "redirect:/category/list";
   }
 }
