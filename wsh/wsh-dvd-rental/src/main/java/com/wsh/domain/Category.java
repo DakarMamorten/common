@@ -1,14 +1,16 @@
 package com.wsh.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.ManyToMany;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -21,6 +23,9 @@ public class Category {
   private Long categoryId;
   private String name;
   private LocalDateTime lastUpdate = LocalDateTime.now();
+
+  @ManyToMany(mappedBy = "categories")
+  private Set<Film> films = new HashSet<>();
 
   public Category(String name) {
     this.name = name;
