@@ -18,17 +18,17 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class Actor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String actorId;
-    private String firstName;
-    private String lastName;
-    private LocalDateTime lastUpdate = LocalDateTime.now();
 
-    public Actor(String firstName,
-                 String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long actorId;
+  private String firstName;
+  private String lastName;
+  private LocalDateTime lastUpdate = LocalDateTime.now();
+
+  public Actor(final String firstName, final String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
 }

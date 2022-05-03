@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Actors</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+  <script th:src="@{'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js'}"></script>
+  <script th:src="@{'https://code.jquery.com/jquery-3.6.0.min.js'}" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div th:include="/navbar::content"></div>
+
+<div class="container my-2">
+  <h1>Actors List</h1>
+
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+          data-bs-target="#addModal">
+    Add actor
+  </button>
+  <br>
+  <br>
+  <table border="1" class="table table-striped table-responsive-md">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Last update</th>
+      <th> Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="actor : ${actors}">
+      <td th:text="${actor.actorId}"></td>
+      <td th:text="${actor.firstName}"></td>
+      <td th:text="${actor.lastName}"></td>
+      <td th:text="${#temporals.format(actor.lastUpdate, 'dd-MM-yyyy HH:mm')}"></td>
+      <td>
+        <button type="button" class="btn btn-sm btn-primary fas fa-pencil-alt noUnderlineCustom text-white" data-bs-toggle="modal"
+                th:attr="data-bs-target=${'#editModal'+actor.actorId}" data-row="${actor}"></button>
+        <button type="button" class="btn btn-sm btn-danger fas fa-solid fa-trash noUnderlineCustom text-white" data-bs-toggle="modal"
+                th:attr="data-bs-target=${'#deleteModal'+actor.actorId}" data-row="${actor}"></button>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+  <!--Modal edit-->
+  <div class="modal fade" th:each="row : ${actors}" th:attr="id=${'editModal' + row.actorId}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eModalLabel">Update actor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form th:action="@{/actor/update}" method="post">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="actorFirstNameId1" class="form-label" th:text="'Input actor first name: '"></label>
+              <input type="text" class="form-control" id="actorFirstNameId1" name="actorFirstName" th:value="${row.firstName}">
+            </div>
+            <div class="mb-3">
+              <label for="actorLastNameId1" class="form-label" th:text="'Input actor last name: '"></label>
+              <input type="text" class="form-control" id="actorLastNameId1" name="actorLastName" th:value="${row.lastName}">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal delete-->
+  <div class="modal fade" th:each="row : ${actors}" th:attr="id=${'deleteModal' + row.actorId}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dModalLabel" th:text="'Delete actor: ' + ${row.firstName + ' ' +  row.lastName}"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form th:action="@{/actor/delete}" method="post">
+          <div class="modal-body">
+            <input hidden="hidden" name="actorId" th:value="${row.actorId}">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div th:if="${actors.getTotalPages() > 1}">
+    <div class="row col-sm-12">
+      <div class="col-sm-2">
+        Total Rows: [[${actors.getTotalElements()}]]
+      </div>
+      <div class="col-sm-10">
+                    <span th:each="i: ${#numbers.sequence(1, actors.getTotalPages())}">
+      <a th:if="${actors.getNumber()  != i -1 }" th:href="@{'/actor/list?page=' + ${i - 1}}">[[${i}]]</a>
+      <span th:unless="${actors.getNumber()   != i -1 }">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal add-->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Add actor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form th:action="@{/actor/add}" method="post">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="actorFirstNameId" class="form-label" th:text="'Input actor first name: '"></label>
+            <input type="text" class="form-control" id="actorFirstNameId" name="actorFirstName">
+          </div>
+          <div class="mb-3">
+            <label for="actorLastNameId" class="form-label" th:text="'Input actor last name: '"></label>
+            <input type="text" class="form-control" id="actorLastNameId" name="actorLastName">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

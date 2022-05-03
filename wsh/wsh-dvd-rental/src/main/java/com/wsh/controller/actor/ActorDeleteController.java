@@ -5,18 +5,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/actor")
+@RequestMapping("/actor/delete")
 @RequiredArgsConstructor
-public class ActorAddController {
+public class ActorDeleteController {
 
   private final ActorService actorService;
 
-  @PostMapping("/add")
-  public String add(final String actorFirstName, final String actorLastName) {
-    actorService.add(actorFirstName, actorLastName);
+  @PostMapping
+  public String update(final @RequestParam("actorId") Long actorId) {
+    actorService.delete(actorId);
     return "redirect:/actor/list";
   }
-
 }
