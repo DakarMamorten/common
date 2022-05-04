@@ -2,6 +2,8 @@ package com.wsh.service;
 
 import com.wsh.domain.Category;
 import com.wsh.repository.CategoryRepository;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +37,15 @@ public class CategoryService {
     return categoryRepository.findAll(pageable);
   }
 
+  public List<Category> findAll() {
+    return categoryRepository.findAll();
+  }
+
   public void delete(final Long categoryId) {
     categoryRepository.deleteById(categoryId);
+  }
+
+  public List<Category> findAllById(final Set<Long> categoryIds) {
+    return categoryRepository.findAllById(categoryIds);
   }
 }

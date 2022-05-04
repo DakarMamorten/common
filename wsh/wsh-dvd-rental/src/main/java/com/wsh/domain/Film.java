@@ -1,8 +1,10 @@
 package com.wsh.domain;
 
+import com.wsh.domain.dto.FilmDto;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,4 +43,23 @@ public class Film {
       inverseJoinColumns = @JoinColumn(name = "category_id")
   )
   private Set<Category> categories = new HashSet<>();
+
+  public String getCategoriesString() {
+    return categories
+        .stream()
+        .map(Category::getName)
+        .collect(Collectors.joining(", "));
+  }
+
+  public static Film of(final FilmDto dto) {
+    final Film film = new Film();
+    film.setTitle(dto.getTitle());
+    film.setDescription(dto.getDescription());
+    film.setReleaseYear(dto.getReleaseYear());
+    film.setRentalDuration(dto.getRentalDuration());
+    film.setRentalRate(dto.getRentalRate());
+    film.setFilmLength(dto.getFilmLength());
+    film.setReplacementCost(dto.getReplacementCost());
+    return film;
+  }
 }
