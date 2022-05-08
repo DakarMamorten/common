@@ -125,26 +125,26 @@
   </div>
 </div>
 
-<!--Modal delete-->
-<!--  <div class="modal fade" th:each="row : ${films}" th:attr="id=${'deleteModal' + row.filmId}" tabindex="-1" aria-hidden="true">-->
-<!--    <div class="modal-dialog">-->
-<!--      <div class="modal-content">-->
-<!--        <div class="modal-header">-->
-<!--          <h5 class="modal-title" id="dModalLabel" th:text="'Delete film: ' + ${row.filmId}"></h5>-->
-<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--        </div>-->
-<!--        <form th:action="@{/film/delete}" method="post">-->
-<!--          <div class="modal-body">-->
-<!--            <input hidden="hidden" name="filmId" th:value="${row.filmId}">-->
-<!--          </div>-->
-<!--          <div class="modal-footer">-->
-<!--            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--            <button type="submit" class="btn btn-danger">Delete</button>-->
-<!--          </div>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+Modal delete
+  <div class="modal fade" th:each="row : ${films}" th:attr="id=${'deleteModal' + row.filmId}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dModalLabel" th:text="'Delete film: ' + ${row.title}"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form th:action="@{/film/delete}" method="post">
+          <div class="modal-body">
+            <input hidden="hidden" name="filmId" th:value="${row.filmId}">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 
 <div th:if="${films.getTotalPages() > 1}">
