@@ -1,5 +1,8 @@
 package com.wsh.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +28,9 @@ public class Actor {
   private String firstName;
   private String lastName;
   private LocalDateTime lastUpdate = LocalDateTime.now();
+
+  @ManyToMany(mappedBy = "actors")
+  private Set<Film> films = new HashSet<>();
 
   public Actor(final String firstName, final String lastName) {
     this.firstName = firstName;

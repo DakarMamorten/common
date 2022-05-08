@@ -44,10 +44,26 @@ public class Film {
   )
   private Set<Category> categories = new HashSet<>();
 
+  @ManyToMany(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
+  @JoinTable(name = "film_actor",
+      joinColumns = @JoinColumn(name = "actor_id"),
+      inverseJoinColumns = @JoinColumn(name = "film_id")
+  )
+  private Set<Actor> actors = new HashSet<>();
+
   public String getCategoriesString() {
     return categories
         .stream()
         .map(Category::getName)
+        .collect(Collectors.joining(", "));
+  }
+  public String getActorsString() {
+    return actors
+        .stream()
+        .map(Actor::getFirstName)
         .collect(Collectors.joining(", "));
   }
 
