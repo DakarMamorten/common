@@ -80,37 +80,50 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form th:action="@{/film/update}" method="post">
+        <input hidden="hidden" name="filmId" th:value="${row.filmId}">
         <div class="modal-body">
           <div class="mb-3">
             <label for="filmTitleId" class="form-label" th:text="'Input film title: '"></label>
             <input type="text" class="form-control" id="filmTitleId" name="title" th:value="${row.title}">
           </div>
-
           <div class="mb-3">
             <label for="filmDescriptionId" class="form-label" th:text="'Input film description: '"></label>
             <input type="text" class="form-control" id="filmDescriptionId" name="description" th:value="${row.description}">
           </div>
-
+          <div class="mb-3">
+            <label for="select-category1" class="form-label" th:text="'Category: '"></label>
+            <select id="select-category1" class="selectpicker" multiple name="categoryIds">
+              <option th:each="category : ${categories}"
+                      th:value="${category.categoryId}"
+                      th:text="${category.name}"
+              th:selected="${row.getSelectedCategories().contains(category.getCategoryId())}"></option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="select-actor1" class="form-label" th:text="'Actor: '"></label>
+            <select id="select-actor1" class="selectpicker" multiple name="actorIds">
+              <option th:each="actor : ${actors}"
+                      th:value="${actor.actorId}"
+                      th:text="${actor.firstName + ' ' + actor.getLastName()}"
+                      th:selected="${row.getSelectedActors().contains(actor.getActorId())}"></option>
+            </select>
+          </div>
           <div class="mb-3">
             <label for="filmReleaseYearId" class="form-label" th:text="'Input film release year: '"></label>
             <input type="text" class="form-control" id="filmReleaseYearId" name="releaseYear" th:value="${row.releaseYear}">
           </div>
-
           <div class="mb-3">
             <label for="filmRentalDurationId" class="form-label" th:text="'Input film rental duration: '"></label>
             <input type="text" class="form-control" id="filmRentalDurationId" name="rentalDuration" th:value="${row.rentalDuration}">
           </div>
-
           <div class="mb-3">
             <label for="filmRentalRateId" class="form-label" th:text="'Input film rental rate: '"></label>
             <input type="text" class="form-control" id="filmRentalRateId" name="rentalRate" th:value="${row.rentalRate}">
           </div>
-
           <div class="mb-3">
             <label for="filmLengthId1" class="form-label" th:text="'Input film film length: '"></label>
             <input type="text" class="form-control" id="filmLengthId1" name="filmLength" th:value="${row.filmLength}">
           </div>
-
           <div class="mb-3">
             <label for="filmReplacementCostId" class="form-label" th:text="'Input film replacement cost: '"></label>
             <input type="text" class="form-control" id="filmReplacementCostId" name="replacementCost" th:value="${row.replacementCost}">

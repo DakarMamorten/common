@@ -7,6 +7,7 @@ import java.util.Set;
 @Data
 public class FilmDto {
 
+  private Long filmId;
   private String title;
   private String description;
   private String releaseYear;

@@ -1,10 +1,11 @@
 package com.wsh.domain;
 
 import com.wsh.domain.dto.FilmDto;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import javax.persistence.Transient;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -44,7 +45,8 @@ public class Film {
       inverseJoinColumns = @JoinColumn(name = "category_id")
   )
   private Set<Category> categories = new HashSet<>();
-
+  @Transient
+  private Set<Long> selectedCategories = new HashSet<>();
   @ManyToMany(cascade = {
       CascadeType.PERSIST,
       CascadeType.MERGE
@@ -54,6 +56,8 @@ public class Film {
       inverseJoinColumns = @JoinColumn(name = "actor_id")
   )
   private Set<Actor> actors = new HashSet<>();
+  @Transient
+  private Set<Long> selectedActors = new HashSet<>();
 
   public String getCategoriesString() {
     return categories
@@ -61,10 +65,11 @@ public class Film {
         .map(Category::getName)
         .collect(Collectors.joining(", "));
   }
+
   public String getActorsString() {
     return actors
         .stream()
-        .map(Actor::getFirstName)
+        .map(a -> a.getFirstName() + " " + a.getLastName())
         .collect(Collectors.joining(", "));
   }
 
@@ -78,5 +83,14 @@ public class Film {
     film.setFilmLength(dto.getFilmLength());
     film.setReplacementCost(dto.getReplacementCost());
     return film;
+  }
+
+  public void addCategories(final List<Category> cat) {
+    if (categories.isEmpty()) {
+      categories.addAll(cat);
+    } else {
+      categories.removeIf(c -> !cat.contains(c));
+      categories.addAll(cat);
+    }
   }
 }
