@@ -1,5 +1,6 @@
 package com.wsh.controller.film;
 
+import com.wsh.service.ActorService;
 import com.wsh.service.CategoryService;
 import com.wsh.service.FilmService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class FilmListController {
 
   private final FilmService filmService;
   private final CategoryService categoryService;
+  private final ActorService actorService;
 
   @GetMapping
   public String list(
@@ -26,6 +28,7 @@ public class FilmListController {
       @PageableDefault(value = 10, page = 0, sort = "filmId") Pageable pageable) {
     model.addAttribute("films", filmService.findAll(pageable));
     model.addAttribute("categories", categoryService.findAll());
+    model.addAttribute("actors", actorService.findAll());
     return "/film/list";
   }
 

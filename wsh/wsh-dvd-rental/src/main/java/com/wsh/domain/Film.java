@@ -1,10 +1,10 @@
 package com.wsh.domain;
 
 import com.wsh.domain.dto.FilmDto;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -49,8 +50,8 @@ public class Film {
       CascadeType.MERGE
   })
   @JoinTable(name = "film_actor",
-      joinColumns = @JoinColumn(name = "actor_id"),
-      inverseJoinColumns = @JoinColumn(name = "film_id")
+      joinColumns = @JoinColumn(name = "film_id"),
+      inverseJoinColumns = @JoinColumn(name = "actor_id")
   )
   private Set<Actor> actors = new HashSet<>();
 

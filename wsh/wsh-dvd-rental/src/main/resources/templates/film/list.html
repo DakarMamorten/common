@@ -71,80 +71,80 @@
     </div>
   </div>
 </div>
-Modal edit
-  <div class="modal fade" th:each="row : ${films}" th:attr="id=${'editModal' + row.filmId}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="eModalLabel">Update film</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form th:action="@{/film/update}" method="post">
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="filmTitleId" class="form-label" th:text="'Input film title: '"></label>
-              <input type="text" class="form-control" id="filmTitleId" name="title" th:value="${row.title}">
-            </div>
-
-            <div class="mb-3">
-              <label for="filmDescriptionId" class="form-label" th:text="'Input film description: '"></label>
-              <input type="text" class="form-control" id="filmDescriptionId" name="description" th:value="${row.description}">
-            </div>
-
-            <div class="mb-3">
-              <label for="filmReleaseYearId" class="form-label" th:text="'Input film release year: '"></label>
-              <input type="text" class="form-control" id="filmReleaseYearId" name="releaseYear" th:value="${row.releaseYear}">
-            </div>
-
-            <div class="mb-3">
-              <label for="filmRentalDurationId" class="form-label" th:text="'Input film rental duration: '"></label>
-              <input type="text" class="form-control" id="filmRentalDurationId" name="rentalDuration" th:value="${row.rentalDuration}">
-            </div>
-
-            <div class="mb-3">
-              <label for="filmRentalRateId" class="form-label" th:text="'Input film rental rate: '"></label>
-              <input type="text" class="form-control" id="filmRentalRateId" name="rentalRate" th:value="${row.rentalRate}">
-            </div>
-
-            <div class="mb-3">
-              <label for="filmLengthId1" class="form-label" th:text="'Input film film length: '"></label>
-              <input type="text" class="form-control" id="filmLengthId1" name="filmLength" th:value="${row.filmLength}">
-            </div>
-
-            <div class="mb-3">
-              <label for="filmReplacementCostId" class="form-label" th:text="'Input film replacement cost: '"></label>
-              <input type="text" class="form-control" id="filmReplacementCostId" name="replacementCost" th:value="${row.replacementCost}">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
+<!--Modal edit-->
+<div class="modal fade" th:each="row : ${films}" th:attr="id=${'editModal' + row.filmId}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eModalLabel">Update film</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form th:action="@{/film/update}" method="post">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="filmTitleId" class="form-label" th:text="'Input film title: '"></label>
+            <input type="text" class="form-control" id="filmTitleId" name="title" th:value="${row.title}">
+          </div>
+
+          <div class="mb-3">
+            <label for="filmDescriptionId" class="form-label" th:text="'Input film description: '"></label>
+            <input type="text" class="form-control" id="filmDescriptionId" name="description" th:value="${row.description}">
+          </div>
+
+          <div class="mb-3">
+            <label for="filmReleaseYearId" class="form-label" th:text="'Input film release year: '"></label>
+            <input type="text" class="form-control" id="filmReleaseYearId" name="releaseYear" th:value="${row.releaseYear}">
+          </div>
+
+          <div class="mb-3">
+            <label for="filmRentalDurationId" class="form-label" th:text="'Input film rental duration: '"></label>
+            <input type="text" class="form-control" id="filmRentalDurationId" name="rentalDuration" th:value="${row.rentalDuration}">
+          </div>
+
+          <div class="mb-3">
+            <label for="filmRentalRateId" class="form-label" th:text="'Input film rental rate: '"></label>
+            <input type="text" class="form-control" id="filmRentalRateId" name="rentalRate" th:value="${row.rentalRate}">
+          </div>
+
+          <div class="mb-3">
+            <label for="filmLengthId1" class="form-label" th:text="'Input film film length: '"></label>
+            <input type="text" class="form-control" id="filmLengthId1" name="filmLength" th:value="${row.filmLength}">
+          </div>
+
+          <div class="mb-3">
+            <label for="filmReplacementCostId" class="form-label" th:text="'Input film replacement cost: '"></label>
+            <input type="text" class="form-control" id="filmReplacementCostId" name="replacementCost" th:value="${row.replacementCost}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
 
-Modal delete
-  <div class="modal fade" th:each="row : ${films}" th:attr="id=${'deleteModal' + row.filmId}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="dModalLabel" th:text="'Delete film: ' + ${row.filmId}"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form th:action="@{/film/delete}" method="post">
-          <div class="modal-body">
-            <input hidden="hidden" name="filmId" th:value="${row.filmId}">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+<!--Modal delete-->
+<!--  <div class="modal fade" th:each="row : ${films}" th:attr="id=${'deleteModal' + row.filmId}" tabindex="-1" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title" id="dModalLabel" th:text="'Delete film: ' + ${row.filmId}"></h5>-->
+<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--        </div>-->
+<!--        <form th:action="@{/film/delete}" method="post">-->
+<!--          <div class="modal-body">-->
+<!--            <input hidden="hidden" name="filmId" th:value="${row.filmId}">-->
+<!--          </div>-->
+<!--          <div class="modal-footer">-->
+<!--            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--            <button type="submit" class="btn btn-danger">Delete</button>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
 
 <div th:if="${films.getTotalPages() > 1}">
@@ -189,6 +189,14 @@ Modal delete
             </select>
           </div>
           <div class="mb-3">
+            <label for="select-actor" class="form-label" th:text="'Actor: '"></label>
+            <select id="select-actor" class="selectpicker" multiple name="actorIds">
+              <option th:each="actor : ${actors}"
+                      th:value="${actor.actorId}"
+                      th:text="${actor.firstName + ' ' + actor.getLastName()}"></option>
+            </select>
+          </div>
+          <div class="mb-3">
             <label for="releaseYearId" class="form-label" th:text="'ReleaseYear: '"></label>
             <input type="text" class="form-control" id="releaseYearId" name="releaseYear">
           </div>
@@ -218,20 +226,20 @@ Modal delete
   </div>
 </div>
 <script>
-  $(document).ready(function () {
-    let options = {
-      max_value: 5,
-      step_size: 0.1,
-      initial_value: 0,
-      selected_symbol_type: 'utf8_star',
-      cursor: 'default',
-      readonly: true,
-      change_once: true
-    }
+    $(document).ready(function () {
+        let options = {
+            max_value: 5,
+            step_size: 0.1,
+            initial_value: 0,
+            selected_symbol_type: 'utf8_star',
+            cursor: 'default',
+            readonly: true,
+            change_once: true
+        }
 
-    $(".rating").rate(options);
+        $(".rating").rate(options);
 
-  });
+    });
 
 </script>
 </body>
