@@ -14,6 +14,7 @@
         <module>wsh-core</module>
         <module>wsh-app-bd</module>
         <module>wsh-crud</module>
+        <module>wsh-dvd-rental</module>
         <module>city-codes</module>
     </modules>
 
