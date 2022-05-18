@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring.jpa:
+  database: POSTGRESQL
+  hibernate.ddl-auto: create-drop
+  show-sql: true
+
+spring.datasource:
+  driverClassName: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/excel
+  username: ps-user
+  password: ps-user
