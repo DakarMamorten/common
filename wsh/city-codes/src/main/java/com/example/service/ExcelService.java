@@ -12,7 +12,7 @@ import java.util.List;
 
 @Component
 public class ExcelService {
-    public static final String FILE_PATH = "/home/vlad/Downloads/1.xlsx";
+    public static final String FILE_PATH = "d://1.xlsx";
     public List<CityCode> read(){
 
         List<CityCode> results = new ArrayList<>();
