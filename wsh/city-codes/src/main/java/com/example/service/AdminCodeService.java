@@ -17,6 +17,6 @@ public class AdminCodeService {
     private ExcelService excelService;
 
     public List<CityCode> get(){
-       return excelService.read();
+        return excelService.read();
     }
 }
