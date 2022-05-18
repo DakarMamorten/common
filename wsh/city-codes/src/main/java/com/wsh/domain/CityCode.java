@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -17,10 +15,16 @@ import javax.persistence.Id;
 public class CityCode {
 
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String code;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_code_id")
+    private AdminCode adminCode;
 
-    private String adminCodeId;
+    public CityCode(String code, AdminCode adminCode) {
+        this.code = code;
+        this.adminCode = adminCode;
+    }
 }

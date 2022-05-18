@@ -7,9 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -18,14 +17,11 @@ import java.util.Set;
 @AllArgsConstructor
 public class AdminCode {
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String code;
 
     private String title;
     private String titleUa;
-
-    @OneToMany
-    private Set<CityCode> codes;
 }
