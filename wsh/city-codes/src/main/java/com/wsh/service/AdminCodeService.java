@@ -1,7 +1,7 @@
-package com.example.service;
+package com.wsh.service;
 
-import com.example.domain.CityCode;
-import com.example.repository.AdminCodeRepository;
+import com.wsh.domain.CityCode;
+import com.wsh.repository.AdminCodeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ import java.util.List;
 @Slf4j
 public class AdminCodeService {
 
-    private AdminCodeRepository adminCodeRepository;
-    private ExcelService excelService;
+    private final AdminCodeRepository adminCodeRepository;
+    private final ExcelService excelService;
 
     public List<CityCode> get(){
         return excelService.read();
