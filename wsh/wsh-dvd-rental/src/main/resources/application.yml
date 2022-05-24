@@ -15,6 +15,6 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/dvd-rental
-    username: postgres
-    password: postgres
+    username: ps-user
+    password: ps-user
     type: com.zaxxer.hikari.HikariDataSource

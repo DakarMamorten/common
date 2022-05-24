@@ -16,6 +16,7 @@
         <module>wsh-crud</module>
         <module>wsh-dvd-rental</module>
         <module>city-codes</module>
+        <module>viktoria</module>
     </modules>
 
     <artifactId>wsh</artifactId>
