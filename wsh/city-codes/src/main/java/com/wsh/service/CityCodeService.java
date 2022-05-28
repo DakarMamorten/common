@@ -1,5 +1,6 @@
 package com.wsh.service;
 
+import com.wsh.domain.AdminCode;
 import com.wsh.domain.CityCode;
 import com.wsh.dto.CodeDto;
 import com.wsh.repository.CityCodeRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -17,16 +19,21 @@ public class CityCodeService {
     private final CityCodeRepository repository;
     private final AdminCodeService adminCodeService;
 
-    public void entityToDTO(List<CodeDto> codeDtoList){
+    public void entityToDTO(List<CodeDto> codeDtoList) {
         List<CityCode> cityCodeList = new ArrayList<>();
+        Map<String, AdminCode> codes = adminCodeService.codes();
         for (CodeDto codeDto : codeDtoList) {
             CityCode cityCode = new CityCode();
             cityCode.setCode(cityCode.getCode());
-            cityCode.setAdminCode(adminCodeService.findCode(codeDto.getAdminCode()));
-            cityCodeList.add(cityCode);
+            if (codes.containsKey(codeDto.getAdminCode())){
+                cityCodeList.add(cityCode);
             }
+        }
         log.info(String.valueOf(cityCodeList.size()));
 //        repository.saveAll(cityCodeList);
-        }
     }
+
+
+}
+
 

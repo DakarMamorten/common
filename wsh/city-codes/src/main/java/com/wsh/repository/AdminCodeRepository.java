@@ -11,4 +11,6 @@ public interface AdminCodeRepository extends JpaRepository<AdminCode, Long> {
     AdminCode findAdminCodeByCode(final String adminCode);
     @Query("select a.code from AdminCode a")
     List<String> getAdminCodeByCode();
+
+
 }

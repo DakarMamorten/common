@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -23,4 +25,12 @@ public class AdminCodeService {
         return adminCodeRepository.getAdminCodeByCode();
     }
 
+    public Map<String,AdminCode> codes(){
+        List<AdminCode> adminCodes = adminCodeRepository.findAll();
+        Map<String,AdminCode> adminCodeMap = new HashMap<>();
+        for (AdminCode code : adminCodes) {
+            adminCodeMap.put(code.getCode(),code);
+        }
+        return adminCodeMap;
+    }
 }
