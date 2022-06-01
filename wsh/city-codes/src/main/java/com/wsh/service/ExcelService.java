@@ -4,7 +4,11 @@ import com.wsh.dto.CodeDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -21,7 +25,7 @@ public class ExcelService {
     public List<CodeDto> read() {
         List<String> codes = adminCodeService.getAdminCode();
         List<CodeDto> results = new ArrayList<>();
-        try (Workbook workbook = WorkbookFactory.create(new File(FILE_PATH))) {
+        try (Workbook workbook = new XSSFWorkbook((new File(FILE_PATH)))) {
             Sheet sheet = workbook.getSheetAt(0);
 
             for (Row row : sheet) {
