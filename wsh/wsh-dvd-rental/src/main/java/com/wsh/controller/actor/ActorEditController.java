@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/actor/update")
+@RequestMapping("/actor")
 @RequiredArgsConstructor
 public class ActorEditController {
 
   private final ActorService actorService;
 
-  @PostMapping
-  public String update(final @RequestParam("actorId") Long actorId, final @RequestParam String actorFirstName, final @RequestParam String actorLastName) {
+  @PostMapping("/update")
+  public String update( final @RequestParam("actorId") Long actorId, final  String actorFirstName, final String actorLastName) {
     actorService.update(actorId, actorFirstName, actorLastName);
     return "redirect:/actor/list";
   }

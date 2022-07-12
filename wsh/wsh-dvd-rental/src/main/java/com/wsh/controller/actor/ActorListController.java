@@ -23,7 +23,7 @@ public class ActorListController {
       @RequestParam(value = "page", required = false, defaultValue = "0") int page,
       @PageableDefault(value = 10, page = 0, sort = "actorId") Pageable pageable) {
     model.addAttribute("actors", actorService.findAll(pageable));
-    return "/actor/list";
+    return "actor/list";
   }
 
 }
