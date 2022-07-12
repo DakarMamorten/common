@@ -41,8 +41,6 @@
       <td>
         <button type="button" class="btn btn-sm btn-primary fas fa-pencil-alt noUnderlineCustom text-white" data-bs-toggle="modal"
                 th:attr="data-bs-target=${'#editModal'+category.categoryId}" data-row="${category}"></button>
-       <!-- <button type="button" class="btn btn-sm btn-danger fas fa-solid fa-trash noUnderlineCustom text-white" data-bs-toggle="modal"
-                th:attr="data-bs-target=${'#deleteModal'+category.categoryId}" data-row="${category}"></button>-->
       </td>
 
     </tr>
@@ -50,7 +48,8 @@
   </table>
 
   <!--Modal edit-->
-  <div class="modal fade" th:each="row : ${categories}" th:attr="id=${'editModal' + row.categoryId}" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" th:each="row : ${categories}" th:attr="id=${'editModal' + row.categoryId}" tabindex="-1"
+       aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -72,26 +71,7 @@
     </div>
   </div>
 
-  <!--Modal delete-->
-  <div class="modal fade" th:each="row : ${categories}" th:attr="id=${'deleteModal' + row.categoryId}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="dModalLabel" th:text="'Delete category: ' + ${row.name}"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form th:action="@{/category/delete}" method="post">
-          <div class="modal-body">
-            <input hidden="hidden" name="categoryId" th:value="${row.categoryId}">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+
 
 
   <div th:if="${categories.getTotalPages() > 1}">

@@ -23,7 +23,7 @@ public class CategoryListController {
       @RequestParam(value = "page", required = false, defaultValue = "0") int page,
       @PageableDefault(value = 10, page = 0, sort = "categoryId") Pageable pageable) {
     model.addAttribute("categories", categoryService.findAll(pageable));
-    return "/category/list";
+    return "category/list";
   }
 
 }
