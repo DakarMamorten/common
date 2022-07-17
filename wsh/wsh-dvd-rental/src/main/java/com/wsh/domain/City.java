@@ -1,12 +1,11 @@
 package com.wsh.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -26,7 +25,16 @@ public class City {
     @JoinColumn(name = "country_id")
     private Country country;
 
+    @Setter(AccessLevel.PRIVATE)
+    @OneToMany(mappedBy = "city")
+    private List<Address> addresses = new ArrayList<>();
+
     public City(String cityTitle) {
         this.cityTitle = cityTitle;
+    }
+
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setCity(this);
     }
 }

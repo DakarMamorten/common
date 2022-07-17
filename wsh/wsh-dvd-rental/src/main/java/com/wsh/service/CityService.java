@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -20,7 +22,7 @@ public class CityService {
         city.setCountry(countryService.findById(countryId));
         cityRepository.save(city);
     }
-
+    @Transactional
     public void update(final Long cityId, final String cityTitle, final Long countryId) {
         cityRepository.findById(cityId).ifPresent(city -> {
                     city.setCityTitle(cityTitle);
@@ -28,6 +30,9 @@ public class CityService {
                 }
         );
     }
+
+    public City findById(final Long cityId){
+        return cityRepository.findById(cityId).orElseThrow(EntityNotFoundException::new);    }
 
     public void delete(final Long cityId) {
         cityRepository.deleteById(cityId);
