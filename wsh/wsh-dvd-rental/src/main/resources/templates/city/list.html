@@ -47,11 +47,11 @@
                     <td class="text-center" th:text="${city.country.countryTitle}"></td>
                     <td>
                         <button type="button"
-                                class="btn btn-sm btn-primary fas fa-pencil-alt noUnderlineCustom text-black-50"
+                                class="btn btn-sm btn-primary fas fa-pencil-alt noUnderlineCustom text-black-150"
                                 data-bs-toggle="modal"
                                 th:attr="data-bs-target=${'#editModal'+ city.cityId}" data-row="${city}"></button>
                         <button type="button"
-                                class="btn  btn-sm btn-success fas fa-solid fa-trash noUnderlineCustom text-black-50"
+                                class="btn  btn-sm btn-success fas fa-solid fa-trash noUnderlineCustom text-black-150"
                                 data-bs-toggle="modal"
                                 th:attr="data-bs-target=${'#deleteModal'+city.cityId}" data-row="${city}"></button>
                     </td>

@@ -14,7 +14,7 @@
     <name>wsh-dvd-rental</name>
     <description>wsh-dvd-rental</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>

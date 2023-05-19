@@ -54,6 +54,7 @@
                     <td class="text-center" th:text="${address.city.cityTitle}"></td>
                     <td class="text-center" th:text="${address.postalCode}"></td>
                     <td class="text-center" th:text="${address.phone}"></td>
+                    <td class="text-center" th:text="${#temporals.format(address.lastUpdate, 'dd-MM-yyyy HH:mm')}"></td>
 
                     <td>
                         <button type="button"

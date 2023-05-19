@@ -1,5 +1,8 @@
 package com.wsh.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.wsh.domain.dto.FilmDto;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -23,6 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "filmId")
 public class Film {
 
   @Id
@@ -44,6 +48,7 @@ public class Film {
       joinColumns = @JoinColumn(name = "film_id"),
       inverseJoinColumns = @JoinColumn(name = "category_id")
   )
+  @JsonManagedReference("film-category")
   private Set<Category> categories = new HashSet<>();
   @Transient
   private Set<Long> selectedCategories = new HashSet<>();
@@ -55,6 +60,7 @@ public class Film {
       joinColumns = @JoinColumn(name = "film_id"),
       inverseJoinColumns = @JoinColumn(name = "actor_id")
   )
+  @JsonManagedReference("film-actor")
   private Set<Actor> actors = new HashSet<>();
   @Transient
   private Set<Long> selectedActors = new HashSet<>();
