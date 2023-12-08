@@ -15,7 +15,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+/**
+ *@author "Vladyslav Paun"
+ */
 @Entity
 @Getter
 @Setter

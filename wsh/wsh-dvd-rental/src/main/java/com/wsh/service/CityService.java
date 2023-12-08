@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-
+/**
+ *@author "Vladyslav Paun"
+ */
 @Service
 @RequiredArgsConstructor
 public class CityService {
