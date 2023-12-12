@@ -1,9 +1,9 @@
 package com.wsh.repository;
 
-import com.wsh.domain.Category;
+import com.wsh.domain.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
  *@author "Vladyslav Paun"
  */
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface CountryRepository extends JpaRepository<Country,Long> {
 }

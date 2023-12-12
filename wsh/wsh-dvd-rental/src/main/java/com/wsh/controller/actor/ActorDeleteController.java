@@ -6,16 +6,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+/**
+ *@author "Vladyslav Paun"
+ */
 @Controller
-@RequestMapping("/actor/delete")
+@RequestMapping("/actor")
 @RequiredArgsConstructor
 public class ActorDeleteController {
 
   private final ActorService actorService;
 
-  @PostMapping
-  public String update(final @RequestParam("actorId") Long actorId) {
+  @PostMapping("/delete")
+  public String delete(final @RequestParam("actorId") Long actorId) {
     actorService.delete(actorId);
     return "redirect:/actor/list";
   }

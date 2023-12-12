@@ -3,7 +3,6 @@ package com.wsh.service;
 import com.wsh.domain.Actor;
 import com.wsh.repository.ActorRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,6 @@ import java.util.Set;
  */
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class ActorService {
 
     private final ActorRepository actorRepository;
@@ -30,8 +28,8 @@ public class ActorService {
         actorRepository.save(actor);
     }
 
-    public Actor findById(final Long id) {
-        return actorRepository.findById(id)
+    public Actor findById(final Long actorId) {
+        return actorRepository.findById(actorId)
                               .orElseThrow(EntityNotFoundException::new);
     }
 

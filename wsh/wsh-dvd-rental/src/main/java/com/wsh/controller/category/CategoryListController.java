@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+/**
+ *@author "Vladyslav Paun"
+ */
 @Controller
 @RequestMapping("/category/list")
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class CategoryListController {
       @RequestParam(value = "page", required = false, defaultValue = "0") int page,
       @PageableDefault(value = 10, page = 0, sort = "categoryId") Pageable pageable) {
     model.addAttribute("categories", categoryService.findAll(pageable));
-    return "/category/list";
+    return "category/list";
   }
 
 }

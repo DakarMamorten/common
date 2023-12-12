@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.7</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.wsh</groupId>
     <artifactId>wsh-dvd-rental</artifactId>
@@ -14,7 +14,7 @@
     <name>wsh-dvd-rental</name>
     <description>wsh-dvd-rental</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
