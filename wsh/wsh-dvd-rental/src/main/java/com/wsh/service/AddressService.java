@@ -52,7 +52,7 @@ public class AddressService {
         return addressRepository.findAll(pageable);
     }
 
-    public void findById(final Long addressId) {
-        addressRepository.findById(addressId).orElseThrow(EntityNotFoundException::new);
+    public Address findById(final Long addressId) {
+        return addressRepository.findById(addressId).orElseThrow(EntityNotFoundException::new);
     }
 }
