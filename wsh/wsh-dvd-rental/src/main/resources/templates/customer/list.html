@@ -108,10 +108,88 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
-
             </form>
         </div>
     </div>
 </div>
+<!--Modal edit-->
+<div class="modal fade" th:each="c : ${customers}" th:attr="id=${'editModal' + c.customerId}" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eModalLabel">Update customer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/customer/update}" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="hidden" name="customerId" th:value="${c.customerId}">
+                        <label for="customerFirstName1" class="form-label"
+                               th:text="'Input customer first name: '"></label>
+                        <input type="text" class="form-control" id="customerFirstName1" name="firstName"
+                               th:value="${c.firstName}">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="customerLastName1" class="form-label"
+                               th:text="'Input customer last name: '"></label>
+                        <input type="text" class="form-control" id="customerLastName1" name="lastName"
+                               th:value="${c.lastName}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="customerEmail1" class="form-label"
+                               th:text="'Input customer email: '"></label>
+                        <input type="text" class="form-control" id="customerEmail1" name="email"
+                               th:value="${c.email}">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:if="${customers.getTotalPages() > 1}">
+    <div class="row col-sm-12">
+        <div class="col-sm-2">
+            Total Rows: [[${customers.getTotalElements()}]]
+        </div>
+        <div class="col-sm-10">
+                    <span th:each="i: ${#numbers.sequence(1, customers.getTotalPages())}">
+      <a th:if="${customers.getNumber()  != i -1 }" th:href="@{'/customers/list?page=' + ${i - 1}}">[[${i}]]</a>
+      <span th:unless="${customers.getNumber()   != i -1 }">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+        </div>
+    </div>
+</div>
+
+<!--Modal delete-->
+<div class="modal fade" th:each="row : ${customers}" th:attr="id=${'deleteModal' + row.customerId}" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dModalLabel" th:text="'Delete customer: ' + ${row.customerId}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/customer/delete}" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="customerId" th:value="${row.customerId}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
