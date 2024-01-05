@@ -16,7 +16,7 @@ public class PaymentEditController {
     private final PaymentService paymentService;
 
     @PostMapping("/update")
-    public String update(final @RequestParam("paymentId") Long paymentID,final @RequestParam Double amount){
+    public String update(final @RequestParam("paymentId") Long paymentID,final @RequestParam("paymentAmount") Double amount){
         paymentService.update(paymentID,amount);
         return "redirect:/payment/list";
     }
