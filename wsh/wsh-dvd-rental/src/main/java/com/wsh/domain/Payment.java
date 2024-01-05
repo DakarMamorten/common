@@ -1,11 +1,9 @@
 package com.wsh.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,12 +12,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
     private Double amount;
-    private LocalDateTime paymentDate= LocalDateTime.now();
-    private LocalDateTime lastUpdateDate = LocalDateTime.now();
+    private LocalDateTime paymentDate = LocalDateTime.now();
+    private LocalDateTime lastUpdate = LocalDateTime.now();
+
+    public Payment(Double amount) {
+        this.amount = amount;
+    }
 }

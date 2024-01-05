@@ -17,7 +17,7 @@ public class CategoriesDeleteController {
   private final CategoryService categoryService;
 
   @PostMapping
-  public String update(final @RequestParam("categoryId") Long categoryId) {
+  public String delete(final @RequestParam("categoryId") Long categoryId) {
     categoryService.delete(categoryId);
     return "redirect:/category/list";
   }
