@@ -1,17 +1,15 @@
 package com.wsh.domain;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import com.wsh.domain.dto.ActorDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author "Vladyslav Paun"
@@ -39,4 +37,10 @@ public class Actor {
         this.lastName = lastName;
     }
 
+    public static Actor of(ActorDTO actorDTO) {
+        Actor actor = new Actor();
+        actor.setFirstName(actorDTO.getFirstName());
+        actor.setLastName(actorDTO.getLastName());
+        return actor;
+    }
 }

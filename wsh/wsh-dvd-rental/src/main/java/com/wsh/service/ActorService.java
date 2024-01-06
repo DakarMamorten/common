@@ -1,6 +1,8 @@
 package com.wsh.service;
 
 import com.wsh.domain.Actor;
+import com.wsh.domain.Film;
+import com.wsh.domain.dto.ActorDTO;
 import com.wsh.repository.ActorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,8 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author "Vladyslav Paun"
@@ -44,8 +48,27 @@ public class ActorService {
                        });
     }
 
-    public Page<Actor> findAll(final Pageable pageable) {
-        return actorRepository.findAll(pageable);
+    public List<ActorDTO> findAll(final Pageable pageable) {
+        List<ActorDTO> list = new ArrayList<>();
+        Page<Actor> actors = actorRepository.findAll(pageable);
+        actors.forEach(actor -> {
+            ActorDTO actorDTO = new ActorDTO();
+            actorDTO.setNumber(actorDTO.getNumber());
+            actorDTO.setTotalPages(actorDTO.getTotalPages());
+            actorDTO.setTotalElements(actorDTO.getTotalElements());
+            actorDTO.setActorId(actorDTO.getActorId());
+            actorDTO.setLastName(actorDTO.getLastName());
+            actorDTO.setFirstName(actor.getFirstName());
+            actorDTO.setLastUpdate(actor.getLastUpdate());
+            Set<String> stringSet = actor.getFilms()
+                    .stream()
+                    .map(Film::getTitle)
+                    .collect(Collectors.toSet());
+            actorDTO.setFilmNames(stringSet);
+            list.add(actorDTO);
+        });
+
+        return list;
     }
 
     public List<Actor> findAll(){

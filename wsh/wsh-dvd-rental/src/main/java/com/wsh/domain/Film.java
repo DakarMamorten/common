@@ -93,12 +93,12 @@ public class Film {
     return film;
   }
 
-  public void addCategories(final List<Category> cat) {
-    if (categories.isEmpty()) {
-      categories.addAll(cat);
+  public void addCategories(final List<Category> categories) {
+    if (this.categories.isEmpty()) {
+      this.categories.addAll(categories);
     } else {
-      categories.removeIf(c -> !cat.contains(c));
-      categories.addAll(cat);
+      this.categories.removeIf(c -> !categories.contains(c));
+      this.categories.addAll(categories);
     }
   }
 }

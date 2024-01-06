@@ -73,24 +73,20 @@
         </div>
     </div>
 
-
-
-
-    <div th:if="${payments.getTotalPages() > 1}">
-        <div class="row col-sm-10">
-            <div class="col-sm-2">
-                Total Rows: [[${payments.getTotalElements()}]]
-            </div>
-            <div class="col-sm-1">
+</div>
+<div th:if="${payments.getTotalPages() > 1}">
+    <div class="row col-sm-12">
+        <div class="col-sm-2">
+            Total Rows: [[${payments.getTotalElements()}]]
+        </div>
+        <div class="col-sm-10">
                     <span th:each="i: ${#numbers.sequence(1, payments.getTotalPages())}">
       <a th:if="${payments.getNumber()  != i -1 }" th:href="@{'/payment/list?page=' + ${i - 1}}">[[${i}]]</a>
       <span th:unless="${payments.getNumber()   != i -1 }">[[${i}]]</span> &nbsp; &nbsp;
                     </span>
-            </div>
         </div>
     </div>
 </div>
-
 <!--Modal add-->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
