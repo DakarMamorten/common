@@ -13,10 +13,8 @@ public class ActorDTO {
     private String firstName;
     private String lastName;
     private LocalDateTime lastUpdate;
-    private Set<String> filmNames;
-    private int number;
-    private int totalPages;
-    private int totalElements;
+    private String filmNames;
+
 
 
     public ActorDTO() {

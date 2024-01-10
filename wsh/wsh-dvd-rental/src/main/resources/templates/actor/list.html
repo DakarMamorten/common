@@ -37,7 +37,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="actor : ${actors}">
+        <tr th:each="actor : ${actors.getActors()}">
             <td th:text="${actor.actorId}"></td>
             <td th:text="${actor.firstName}"></td>
             <td th:text="${actor.lastName}"></td>
@@ -45,15 +45,43 @@
             <td>
                 <button type="button" class="btn btn-sm btn-primary fas fa-pencil-alt noUnderlineCustom text-white"
                         data-bs-toggle="modal"
-                        th:attr="data-bs-target=${'#editModal'+ actor.actorId}" data-row="${actor}"></button>
+                        th:attr="data-bs-target=${'#editModal'+ actor.actorId}" data-row="${actor}">
+
+                </button>
+                <button type="button"
+                        class="btn btn-sm btn-primary fas fa-regular fa-glasses noUnderlineCustom text-white"
+                        data-bs-toggle="modal"
+                        th:attr="data-bs-target=${'#infoModal' + actor.actorId}" data-row="${actor}">
+                </button>
             </td>
 
         </tr>
         </tbody>
     </table>
 
+    <!--Show-->
+    <div class="modal fade" th:each="row : ${actors.getActors()}" th:attr="id=${'infoModal' + row.actorId}"
+         tabindex="-1"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:text="'More Info' "></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p th:text="'Film title: ' + ${row.filmNames}"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Modal edit-->
-    <div class="modal fade" th:each="row : ${actors}" th:attr="id=${'editModal' + row.actorId}" tabindex="-1"
+    <div class="modal fade" th:each="row : ${actors.getActors()}" th:attr="id=${'editModal' + row.actorId}"
+         tabindex="-1"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
