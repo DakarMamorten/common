@@ -1,6 +1,5 @@
 package com.wsh.service;
 
-import com.wsh.domain.Address;
 import com.wsh.domain.Customer;
 import com.wsh.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;

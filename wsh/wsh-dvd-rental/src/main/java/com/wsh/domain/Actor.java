@@ -1,12 +1,12 @@
 package com.wsh.domain;
 
 import com.wsh.domain.dto.ActorDTO;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +28,7 @@ public class Actor {
     private String lastName;
     private LocalDateTime lastUpdate = LocalDateTime.now();
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actors", fetch = FetchType.LAZY)
     private Set<Film> films = new HashSet<>();
 
     public Actor(final String firstName,

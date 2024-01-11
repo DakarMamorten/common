@@ -9,15 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -57,7 +50,8 @@ public class Film {
   @ManyToMany(cascade = {
       CascadeType.PERSIST,
       CascadeType.MERGE
-  })
+
+  },fetch = FetchType.LAZY)
   @JoinTable(name = "film_actor",
       joinColumns = @JoinColumn(name = "film_id"),
       inverseJoinColumns = @JoinColumn(name = "actor_id")

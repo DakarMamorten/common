@@ -1,21 +1,20 @@
 package com.wsh.domain.dto;
 
 import com.wsh.domain.Actor;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
+@AllArgsConstructor
 public class ActorDTO {
 
     private Long actorId;
     private String firstName;
     private String lastName;
     private LocalDateTime lastUpdate;
-    private String filmNames;
-
-
+    private Object filmTitle;
 
     public ActorDTO() {
     }
