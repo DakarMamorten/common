@@ -15,9 +15,9 @@
 
 </head>
 <body>
-<div th:include="/navbar::content"></div>
+<div th:insert="~{/navbar :: content}"></div>
 
-<div class="container">
+<div class="container my-2">
 
     <h1>Customer list</h1>
     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
@@ -36,24 +36,18 @@
                     <th class="text-center">Last name</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Active</th>
-                    <th class="text-center">City</th>
-                    <th class="text-center">Postal Code</th>
-                    <th class="text-center">Phone number</th>
                     <th class="text-center">Last update</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="c : ${customers}">
+                <tr th:each="c : ${customers.getContent()}">
                     <td class="text-center" th:text="${c.customerId}"></td>
                     <td class="text-center" th:text="${c.firstName}"></td>
                     <td class="text-center" th:text="${c.lastName}"></td>
                     <td class="text-center" th:text="${c.email}"></td>
                     <td class="text-center" th:text="${c.active}"></td>
-                    <td class="text-center" th:text="${c.address.city.cityTitle}"></td>
-                    <td class="text-center" th:text="${c.address.postalCode}"></td>
-                    <td class="text-center" th:text="${c.address.phone}"></td>
-                    <td class="text-center" th:text="${#temporals.format(c.createDate, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td class="text-center" th:text="${#temporals.format(c.lastUpdate, 'dd-MM-yyyy HH:mm')}"></td>
 
                     <td>
                         <button type="button"
@@ -65,7 +59,13 @@
                                 class="btn  btn-sm btn-success fas fa-solid fa-trash noUnderlineCustom text-black-50"
                                 data-bs-toggle="modal"
                                 th:attr="data-bs-target=${'#deleteModal'+c.customerId}"
-                                data-row="${customer}"></button>
+                                data-row="${customer}">
+                        </button>
+                        <button type="button"
+                                class="btn btn-sm btn-primary fas fa-regular fa-glasses noUnderlineCustom text-white"
+                                data-bs-toggle="modal"
+                                th:attr="data-bs-target=${'#infoModal' + c.customerId}" data-row="${customer}">
+                        </button>
                     </td>
 
                 </tr>
@@ -112,8 +112,33 @@
         </div>
     </div>
 </div>
+
+<!--Show-->
+<div class="modal fade" th:each="row : ${customers.getContent()}" th:attr="id=${'infoModal' + row.customerId}"
+     tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" th:text="'More Info' "></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p th:text="'Address: ' + ${row.address}"></p>
+                <p th:text="'Address2: ' + ${row.address2}"></p>
+                <p th:text="'District: ' + ${row.district}"></p>
+                <p th:text="'City: ' + ${row.cityTitle}"></p>
+                <p th:text="'Postal code: ' + ${row.postalCode}"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Modal edit-->
-<div class="modal fade" th:each="c : ${customers}" th:attr="id=${'editModal' + c.customerId}" tabindex="-1"
+<div class="modal fade" th:each="c : ${customers.getContent()}" th:attr="id=${'editModal' + c.customerId}" tabindex="-1"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -169,7 +194,7 @@
 </div>
 
 <!--Modal delete-->
-<div class="modal fade" th:each="row : ${customers}" th:attr="id=${'deleteModal' + row.customerId}" tabindex="-1"
+<div class="modal fade" th:each="row : ${customers.getContent()}" th:attr="id=${'deleteModal' + row.customerId}" tabindex="-1"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

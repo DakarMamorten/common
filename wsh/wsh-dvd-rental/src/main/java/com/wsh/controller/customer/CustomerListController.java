@@ -1,7 +1,6 @@
 package com.wsh.controller.customer;
 
 import com.wsh.service.AddressService;
-import com.wsh.service.CityService;
 import com.wsh.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +24,7 @@ public class CustomerListController {
     @GetMapping("/list")
     public String list(Model model,
                         @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                        @PageableDefault(value = 60, page = 0, sort = "customerId") Pageable pageable) {
+                        @PageableDefault(value = 10, page = 0, sort = "customerId") Pageable pageable) {
         model.addAttribute("customers", customerService.findAll(pageable));
         model.addAttribute("addresses", addressService.findAll());
         return "customer/list";

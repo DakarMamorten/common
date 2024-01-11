@@ -1,6 +1,8 @@
 package com.wsh.service;
 
 import com.wsh.domain.Customer;
+import com.wsh.domain.dto.CustomerDTO;
+import com.wsh.domain.dto.PageView;
 import com.wsh.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,7 +27,7 @@ public class CustomerService {
     }
 
     @Transactional
-    public void update(final Long customerId,final String firstName, final String lastName, final String email) {
+    public void update(final Long customerId, final String firstName, final String lastName, final String email) {
         customerRepository.findById(customerId).ifPresent(c -> {
             c.setFirstName(firstName);
             c.setLastName(lastName);
@@ -34,15 +36,21 @@ public class CustomerService {
 
     }
 
-    public List<Customer> findAll(){
+    public List<Customer> findAll() {
         return customerRepository.findAll();
     }
 
-    public Page<Customer> findAll(final Pageable pageable) {
-        return customerRepository.findAll(pageable);
+    public PageView<CustomerDTO> findAll(final Pageable pageable) {
+        PageView<CustomerDTO> view = new PageView<>();
+        Page<CustomerDTO> customers = customerRepository.findCustomersWithAddress(pageable);
+        view.setContent(customers.getContent());
+        view.setNumber(customers.getNumber());
+        view.setTotalPages(customers.getTotalPages());
+        view.setTotalElements(customers.getTotalElements());
+        return view;
     }
 
-    public void delete(final Long id){
+    public void delete(final Long id) {
         customerRepository.deleteById(id);
     }
 }

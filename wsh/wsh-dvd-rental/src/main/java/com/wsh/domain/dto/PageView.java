@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ActorView extends PageDto {
-    List<ActorDTO> actors;
+public class PageView<T> extends PageDto {
+    List<T> content;
 }

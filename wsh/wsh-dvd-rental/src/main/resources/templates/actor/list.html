@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<div th:include="/navbar::content"></div>
+<div th:insert="~{/navbar :: content}"></div>
 
 <div class="container my-2">
     <h1>Actors List</h1>
@@ -37,7 +37,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="actor : ${actors.getActors()}">
+        <tr th:each="actor : ${actors.getContent()}">
             <td th:text="${actor.actorId}"></td>
             <td th:text="${actor.firstName}"></td>
             <td th:text="${actor.lastName}"></td>
@@ -60,7 +60,7 @@
     </table>
 
     <!--Show-->
-    <div class="modal fade" th:each="row : ${actors.getActors()}" th:attr="id=${'infoModal' + row.actorId}"
+    <div class="modal fade" th:each="row : ${actors.getContent()}" th:attr="id=${'infoModal' + row.actorId}"
          tabindex="-1"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -80,7 +80,7 @@
     </div>
 
     <!--Modal edit-->
-    <div class="modal fade" th:each="row : ${actors.getActors()}" th:attr="id=${'editModal' + row.actorId}"
+    <div class="modal fade" th:each="row : ${actors.getContent()}" th:attr="id=${'editModal' + row.actorId}"
          tabindex="-1"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -151,7 +151,5 @@
         </div>
     </div>
 </div>
-
 </body>
-
 </html>

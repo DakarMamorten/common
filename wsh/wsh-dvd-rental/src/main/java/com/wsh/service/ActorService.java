@@ -2,7 +2,7 @@ package com.wsh.service;
 
 import com.wsh.domain.Actor;
 import com.wsh.domain.dto.ActorDTO;
-import com.wsh.domain.dto.ActorView;
+import com.wsh.domain.dto.PageView;
 import com.wsh.repository.ActorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -46,16 +46,15 @@ public class ActorService {
                 });
     }
 
-    @Transactional
-    public ActorView findAll(final Pageable pageable) {
-        var actorView = new ActorView();
+    public PageView<ActorDTO> findAll(final Pageable pageable) {
+        var view = new PageView<ActorDTO>();
         Page<ActorDTO> actors = actorRepository.findAllActorsWithFilms(pageable);
 
-        actorView.setActors(actors.getContent());
-        actorView.setNumber(actors.getNumber());
-        actorView.setTotalPages(actors.getTotalPages());
-        actorView.setTotalElements(actors.getTotalElements());
-        return actorView;
+        view.setContent(actors.getContent());
+        view.setNumber(actors.getNumber());
+        view.setTotalPages(actors.getTotalPages());
+        view.setTotalElements(actors.getTotalElements());
+        return view;
     }
 
 
