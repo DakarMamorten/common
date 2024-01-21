@@ -5,13 +5,13 @@
     <title>Countries</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
           crossorigin="anonymous">
-    <script th:src="@{'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js'}"></script>
     <script th:src="@{'https://code.jquery.com/jquery-3.6.0.min.js'}"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script th:src="@{'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js'}"></script>
 
 </head>
 <body>
@@ -54,7 +54,8 @@
                                 class="btn btn-sm btn-primary fas fa-pencil-alt noUnderlineCustom text-black-50"
                                 data-bs-toggle="modal"
                                 th:attr="data-bs-target=${'#editModal'+ c.customerId}"
-                                data-row="${customer}"></button>
+                                data-row="${customer}">
+                        </button>
                         <button type="button"
                                 class="btn  btn-sm btn-success fas fa-solid fa-trash noUnderlineCustom text-black-50"
                                 data-bs-toggle="modal"
@@ -66,8 +67,12 @@
                                 data-bs-toggle="modal"
                                 th:attr="data-bs-target=${'#infoModal' + c.customerId}" data-row="${customer}">
                         </button>
+                        <button type="button"
+                                class="btn btn-sm btn-primary fas fa-solid fa-calculator noUnderlineCustom text-white"
+                                data-bs-toggle="modal"
+                                th:attr="data-bs-target=${'#cashModal' + c.customerId}" data-row="${customer}">
+                        </button>
                     </td>
-
                 </tr>
                 </tbody>
             </table>
@@ -137,6 +142,26 @@
     </div>
 </div>
 
+<!--Cash-->
+<div class="modal fade" th:each="row : ${customers.getContent()}" th:attr="id=${'cashModal' + row.customerId}"
+     tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" th:text="'Cash history for ' + ${row.customerId}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p th:text="'Payment: ' + ${row.amount}"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Modal edit-->
 <div class="modal fade" th:each="c : ${customers.getContent()}" th:attr="id=${'editModal' + c.customerId}" tabindex="-1"
      aria-hidden="true">
@@ -194,7 +219,8 @@
 </div>
 
 <!--Modal delete-->
-<div class="modal fade" th:each="row : ${customers.getContent()}" th:attr="id=${'deleteModal' + row.customerId}" tabindex="-1"
+<div class="modal fade" th:each="row : ${customers.getContent()}" th:attr="id=${'deleteModal' + row.customerId}"
+     tabindex="-1"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -214,7 +240,6 @@
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

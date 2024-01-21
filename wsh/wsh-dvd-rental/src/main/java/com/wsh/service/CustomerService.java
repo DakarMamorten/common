@@ -39,7 +39,7 @@ public class CustomerService {
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
-
+    @Transactional
     public PageView<CustomerDTO> findAll(final Pageable pageable) {
         PageView<CustomerDTO> view = new PageView<>();
         Page<CustomerDTO> customers = customerRepository.findCustomersWithAddress(pageable);

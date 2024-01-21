@@ -21,10 +21,30 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
         a.postalCode,
         ct.cityTitle,
         c.lastUpdate
-    ) FROM com.wsh.domain.Customer c
+    ) FROM com.wsh.do main.Customer c
     JOIN c.address a
     JOIN a.city ct
 """;
     @Query(QUERY)
     Page<CustomerDTO> findCustomersWithAddress(Pageable pageable);
+
+//    String QUERYPAYMENT = """
+//    SELECT new com.wsh.domain.dto.PaymentDTO(
+//        p.paymentId,
+//        p.amount,
+//        p.paymentDate,
+//        p.lastUpdate,
+//        c.customerId
+//    ) FROM com.wsh.domain.Payment p
+//    JOIN p.customer c
+//    GROUP BY
+//        p.paymentId,
+//        p.amount,
+//        p.paymentDate,
+//        p.lastUpdate,
+//        c.customerId
+//""";
+//    @Query(QUERYPAYMENT)
+//    Page<PaymentDTO> findPaymentsByCustomer(Pageable pageable);
+
 }

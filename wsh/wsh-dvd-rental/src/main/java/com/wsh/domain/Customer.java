@@ -1,14 +1,17 @@
 package com.wsh.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
     @Id
@@ -19,13 +22,19 @@ public class Customer {
     private String lastName;
     private String email;
     private boolean active = true;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+    @ManyToOne(optional = false)
     @JoinColumn(name = "address_id")
     private Address address;
-    private LocalDateTime createDate = LocalDateTime.now();
 
+    @OneToMany(mappedBy = "customer")
+    private List<Payment> payments = new ArrayList<>();
+
+    private LocalDateTime createDate = LocalDateTime.now();
     private LocalDateTime lastUpdate = LocalDateTime.now();
 
+    public Customer() {
+    }
     public Customer(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
