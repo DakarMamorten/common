@@ -2,6 +2,7 @@ package com.wsh.domain.dto;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,9 +18,9 @@ public class CustomerDTO {
     private String postalCode;
     private String cityTitle;
     private LocalDateTime lastUpdate;
-    private Double amount;
+    private BigDecimal amount;
 
-    public CustomerDTO(Long customerId, String firstName, String lastName, String email, boolean active, String address, String address2, String district, String postalCode, String cityTitle, LocalDateTime lastUpdate) {
+    public CustomerDTO(Long customerId, String firstName, String lastName, String email, boolean active, String address, String address2, String district, String postalCode, String cityTitle, LocalDateTime lastUpdate,BigDecimal amount) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,5 +32,6 @@ public class CustomerDTO {
         this.postalCode = postalCode;
         this.cityTitle = cityTitle;
         this.lastUpdate = lastUpdate;
+        this.amount = amount;
     }
 }

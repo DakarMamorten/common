@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -27,12 +28,12 @@ public class PaymentService {
         paymentRepository.deleteById(paymentId);
     }
 
-    public Payment add(final Double amount){
+    public Payment add(final BigDecimal amount){
         Payment payment = new Payment(amount);
         return paymentRepository.save(payment);
     }
 
-    public void update(final Long paymentId, final Double amount){
+    public void update(final Long paymentId, final BigDecimal amount){
         paymentRepository.findById(paymentId).ifPresent(p -> p.setAmount(amount));
     }
 }
