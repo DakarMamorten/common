@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -34,6 +35,10 @@ public class PaymentService {
     }
 
     public void update(final Long paymentId, final BigDecimal amount){
-        paymentRepository.findById(paymentId).ifPresent(p -> p.setAmount(amount));
+        paymentRepository.findById(paymentId).ifPresent(p -> {
+            p.setAmount(amount);
+            p.setLastUpdate(LocalDateTime.now());
+            paymentRepository.save(p);
+        });
     }
 }

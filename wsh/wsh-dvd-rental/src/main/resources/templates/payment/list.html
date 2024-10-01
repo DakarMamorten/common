@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<div th:include="/navbar::content"></div>
+<div th:insert="~{/navbar :: content}"></div>
 
 <div class="container my-2">
     <h1>Payment List</h1>
@@ -50,7 +50,7 @@
     </table>
 
     <!--Modal edit-->
-    <div class="modal fade" th:each="row : ${payments}" th:attr="id=${'editModal' + row.paymentId}" tabindex="-1"
+    <div class="modal fade" th:each="row : ${payments}" th:id="'editModal' + ${row.paymentId}" tabindex="-1"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
