@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rentals</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Rentals</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Rental ID</th>
+                <th>Rental Date</th>
+                <th>Inventory ID</th>
+                <th>Customer ID</th>
+                <th>Return Date</th>
+                <th>Staff ID</th>
+                <th>Last Update</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="rental : ${rentals}">
+                <td th:text="${rental.rentalId}">1</td>
+                <td th:text="${#dates.format(rental.rentalDate, 'yyyy-MM-dd HH:mm')}">2024-11-10 14:30</td>
+                <td th:text="${rental.inventory.inventoryId}">101</td>
+                <td th:text="${rental.customer.customerId}">202</td>
+                <td th:text="${#dates.format(rental.returnDate, 'yyyy-MM-dd HH:mm')}">2024-11-15 10:00</td>
+                <td th:text="${rental.staff.staffId}">303</td>
+                <td th:text="${#dates.format(rental.lastUpdate, 'yyyy-MM-dd HH:mm')}">2024-11-12 12:00</td>
+                <td>
+                    <button class="btn btn-info btn-sm"
+                            th:data-bs-target="'#viewEditRentalModal'"
+                            th:data-bs-toggle="'modal'"
+                            th:attrappend="data-id=${rental.rentalId}">
+                        View/Edit
+                    </button>
+                    <button class="btn btn-danger btn-sm"
+                            th:onclick="'deleteRental(' + ${rental.rentalId} + ')'"
+                            type="button">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="viewEditRentalModal" tabindex="-1" aria-labelledby="viewEditRentalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewEditRentalModalLabel">View/Edit Rental</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="rentalForm">
+                    <div class="mb-3">
+                        <label for="rentalDate" class="form-label">Rental Date</label>
+                        <input type="datetime-local" class="form-control" id="rentalDate" name="rentalDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="returnDate" class="form-label">Return Date</label>
+                        <input type="datetime-local" class="form-control" id="returnDate" name="returnDate" required>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="saveRental()">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteRentalModal" tabindex="-1" aria-labelledby="deleteRentalModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteRentalModalLabel">Delete Rental</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this rental?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDeleteRental()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function saveRental() {
+        // Your logic to save rental changes
+    }
+
+    function deleteRental(rentalId) {
+        // Show confirmation modal
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteRentalModal'));
+        deleteModal.show();
+    }
+
+    function confirmDeleteRental() {
+        // Your logic to delete rental
+    }
+</script>
+</body>
+</html>

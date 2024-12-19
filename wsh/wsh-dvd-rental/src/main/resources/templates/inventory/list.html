@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Inventory List</h2>
+
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addInventoryModal">Add Inventory</button>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Film ID</th>
+            <th>Store ID</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="inventory : ${inventories}">
+            <td th:text="${inventory.inventoryId}"></td>
+            <td th:text="${inventory.filmId}"></td>
+            <td th:text="${inventory.storeId}"></td>
+            <td>
+                <button class="btn btn-info btn-sm"
+                        th:data-bs-target="'#viewEditInventoryModal'"
+                        th:data-bs-toggle="'modal'"
+                        th:attrappend="data-id=${inventory.inventoryId}">
+                    View/Edit
+                </button>
+
+                <button class="btn btn-danger btn-sm"
+                        th:onclick="'deleteInventory(' + ${inventory.inventoryId} + ')'"
+                        type="button">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addInventoryModal" tabindex="-1" aria-labelledby="addInventoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/inventory/add}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addInventoryModalLabel">Add Inventory</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="filmId" class="form-label">Film ID</label>
+                            <input type="number" class="form-control" id="filmId" name="filmId" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="storeId" class="form-label">Store ID</label>
+                            <input type="number" class="form-control" id="storeId" name="storeId" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="viewEditInventoryModal" tabindex="-1" aria-labelledby="viewEditInventoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/inventory/edit}" method="post">
+                    <input type="hidden" id="inventoryId" name="inventoryId">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewEditInventoryModalLabel">Edit Inventory</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="editFilmId" class="form-label">Film ID</label>
+                            <input type="number" class="form-control" id="editFilmId" name="filmId" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStoreId" class="form-label">Store ID</label>
+                            <input type="number" class="form-control" id="editStoreId" name="storeId" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function deleteInventory(id) {
+        if (confirm("Are you sure you want to delete this inventory?")) {
+            fetch(`/inventory/delete/${id}`, { method: 'DELETE' })
+                .then(response => location.reload())
+                .catch(error => console.error('Error deleting inventory:', error));
+        }
+    }
+</script>
+</body>
+</html>
